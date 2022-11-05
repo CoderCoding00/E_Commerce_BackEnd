@@ -3,7 +3,7 @@
 
 ## Project Info
 
-I built the back end for an e-commerce site. We were also given some started code that required modifying. I configured an Express.js API to use Sequelize to interact with a MySQL database.
+I built the back end for an e-commerce site. We were also given started code that required modifying. I configured an Express.js API to use Sequelize to interact with a MySQL database.
 
 We were asked to provide a link to a video that demonstrates the projects functionality since we did not deploy the application. The link will be provided below.
 
@@ -25,3 +25,8 @@ When the user tests API POST, PUT, and DELETE routes in Insomnia, they are able 
 ```
 
 ## Video Demonstration and Links 
+## ScreenCastify Link to Video 
+chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/4cddfc2c-0ead-4edd-y2a0-30f4f64c8b57
+
+## Embedded Video 
+<iframe src="https://drive.google.com/file/d/1QuQVNerW2P3B3WwYIXpX8QwZRA8g6_WP/preview" width="640" height="480"></iframe>
