@@ -1,3 +1,4 @@
+// LOWER CASE COMMENTS PROVIDED BY INSTRUCTOR, UPPER CASE COMMENTS BY ME
 const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
 
@@ -8,24 +9,25 @@ router.get('/', (req, res) => {
   // be sure to include its associated Product data
 
   //*** MY CODE STARTS HERE
+  // "FIND ALL" TAGS USING ATTRIBUTES AND INCLUDE
   Tag.findAll({
     attributes: ['id', 'tag_name'],
     include: [
       {
         model: Product,
-        // DO I NEED "id"?????
         attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
-        // ***** DO I NEED THIS LINE BELOW?????
-        // through: ProductTag
       },
     ],
   })
+    // .THEN() METHOD TO RETURN JSON DATA
     .then((dbTagData) => res.json(dbTagData))
     .then(() => {
-      console.log('requested all data');
+      // DO A CONSOLE.LOG() TO SEE IF IT WORKS
+      console.log('All data requested from Tag');
     })
     .catch((err) => {
       console.log(err);
+      // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
     }
     );
@@ -36,75 +38,53 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Product data
 
   // *** MY CODE STARTS HERE
+  // "FIND ONE" TAG USING ATTRIBUTES AND INCLUDE
   Tag.findOne({
     where: {
       id: req.params.id,
     },
-    // is tag_name needed here????
-    // attributes: ['id', 'tag_name'],
     include: [
       {
         model: Product,
-        // DO I NEED 'id'?????
         attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
-        // ***** DO I NEED THIS LINE BELOW?????
-        // through: ProductTag
       },
     ],
   })
     .then((dbTagData) => {
       if (!dbTagData) {
+        // 404 FOR NOT FOUND
         res.status(404).json({ message: 'There is no tag found with that id' });
         return;
       }
       res.json(dbTagData);
-    }
-    )
+    })
     .catch((err) => {
       console.log(err);
+      // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    }
-    );
+    });
 });
 
 router.post('/', (req, res) => {
   // create a new tag
 
   // *** MY CODE STARTS HERE
+  // CREATE A NEW TAG USING tag_name FROM req.body
   Tag.create({
     tag_name: req.body.tag_name,
   })
     .then((dbTagData) => res.json(dbTagData))
     .catch((err) => {
       console.log(err);
+      // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    }
-    );
-});
-
-router.put('/test/:id', (req, res) => {
-  // update a tag's name by its `id` value
-  console.log('put connected found,', req.params.id);
-  res.send('found', req.params.id);
+    });
 });
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
 
   // *** MY CODE STARTS HERE
-  // Tag.update(
-  //   {
-  //     tag_name: req.body.tag_name,
-  //   },
-  //   {
-  //     where: {
-  //       id: req.params.id,
-  //     },
-  //   }
-  // )
-
-  // *****TRIED THIS BELOW INSTEAD OF THE ABOVE CODE
-  // OR SHOULD IT BE tag_name: req.body.tag_name, ??????
   Tag.update(req.body, {
     where: {
       id: req.params.id,
@@ -115,8 +95,6 @@ router.put('/:id', (req, res) => {
         res.status(404).json({ message: 'There is no tag found with that id' });
         return;
       }
-      // CHANGED THIS TO CODE BELOW
-      // res.status(200).send('Updated id');
       res.json(dbTagData);
     })
     .then(() => {
@@ -125,8 +103,7 @@ router.put('/:id', (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
-    }
-    );
+    });
 });
 
 router.delete('/:id', (req, res) => {
@@ -144,13 +121,12 @@ router.delete('/:id', (req, res) => {
         return;
       }
       res.json(dbTagData);
-    }
-    )
+    })
     .catch((err) => {
       console.log(err);
+      // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    }
-    );
+    });
 });
 
 module.exports = router;

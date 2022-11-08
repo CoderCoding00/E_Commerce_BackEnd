@@ -1,3 +1,4 @@
+// ALL LOWERCASE COMMENTS PROVIDED BY INSTRUCTOR, UPPERCASE COMMENTS BY ME
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
@@ -8,20 +9,18 @@ router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
 
-
   // *** MY CODE STARTS HERE
+  // "FIND ALL" PRODUCTS USING ATTRIBUTES AND INCLUDE
   Product.findAll({
-    // ***** DO I NEED THE LINE BELOW????
-    // attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
     include: [
       {
+        // CATEGORY MODEL
         model: Category,
-        // **** ADDED 'id'
         attributes: ['id', 'category_name'],
       },
       {
+        // TAG MODEL
         model: Tag,
-        // **** ADDED 'id'
         attributes: ['id', 'tag_name'],
       },
     ],
@@ -39,37 +38,30 @@ router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 
-  // *** MY CODE STARTS HERE
+  // "FIND ONE" PRODUCT USING ATTRIBUTES AND INCLUDE
   Product.findOne({
     where: {
       id: req.params.id
     }
   },
     {
-      // ****** DO I NEED THIS LINE BELOW?????
-      // attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
       include: [
         {
+          // CATEGORY MODEL
           model: Category,
-          // ***** ADDED 'id'
           attributes: ['id', 'category_name'],
         },
         {
+          // TAG MODEL
           model: Tag,
-          // ***** ADDED 'id'
           attributes: ['id', 'tag_name'],
         },
       ],
     })
-    // .then((dbProductData) => res.json(dbProductData))
-    // .catch((err) => {
-    //   console.log(err);
-    //   res.status(500).json(err);
-    // }
-    // );
-    // *** NEW CODE 
+
     .then((dbProductData) => {
       if (!dbProductData) {
+        // 404 ERROR FOR NOT FOUND
         res.status(404).json({ message: 'There is no product found with that id' });
         return;
       }
@@ -78,6 +70,7 @@ router.get('/:id', (req, res) => {
     )
     .catch((err) => {
       console.log(err);
+      // 500 ERROR FOR A GENERIC SERVER ERROR
       res.status(500).json(err);
     }
     );
@@ -85,7 +78,7 @@ router.get('/:id', (req, res) => {
 
 
 // create new product
-// CODE BELOW PROVIDED BY THE INSTRUCTOR
+//****** LINES 83-154 PROVIDED BY INSTRUCTOR.
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -96,18 +89,6 @@ router.post('/', (req, res) => {
     }
   */
   Product.create(req.body)
-
-    //**** I ADDED THE CODE BELOW AFTER TUTOR SESSION FAIL 
-    // ****TO TEST IF IT IS NEEDED AND GETS RID OF ERRORS
-    // Product.create({
-    //   product_name: req.body.product_name,
-    //   price: req.body.price,
-    //   stock: req.body.stock,
-    //   category_id: req.body.category_id,
-    //   tagIds: req.body.tag_id,
-    // })
-
-    // CODE PROVIDED BY THE INSTRUCTOR
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
@@ -173,31 +154,26 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
-  // MY CODE BELOW
+
+  // ***** MY CODE BELOW
+  // USE .DESTROY() TO DELETE A PRODUCT. CAN I USE .DELETE() INSTEAD????? ASK TUTOR/INSTRUCTOR
   Product.destroy({
     where: {
       id: req.params.id,
     },
   })
     .then((dbProductData) => {
-      // *** COMMENTED OUT THE LINE BELOW and USED !dbProductData
-      // .then((product) => {
       if (!dbProductData) {
-        // *** COMMENTED OUT THE LINE BELOW
-        // if (!product) {
-        res.status(404).json({ message: 'There is no product with this id' });
+        // 404 FOR NOT FOUND
+        res.status(404).json({ message: 'There is no product with that id' });
         return;
       }
       res.json(dbProductData);
-      // **** COMMENTED OUT THE LINE BELOW
-      // res.json(product);
-    }
-    )
-    // **** COMMENTED OUT THE LINE BELOW
-    // .catch((err) => res.json(err));
-    // **** REPLACED WITH THE CODE BELOW
+    })
+
     .catch((err) => {
       console.log(err);
+      // 500 ERROR FOR A GENERIC SERVER ERROR
       res.status(500).json(err);
     });
 });
