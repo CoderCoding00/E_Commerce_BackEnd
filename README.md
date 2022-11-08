@@ -27,5 +27,5 @@ When the user tests API POST, PUT, and DELETE routes in Insomnia, they are able 
 ## ScreenCastify Link to Video 
 https://watch.screencastify.com/v/K9etITb88OQHj0lTlixM
 
-## Embedded Video 
-
+## Google Drive Link to Video 
+https://drive.google.com/file/d/1TLPr7NAjfidfhyuZyAP07SFwNuOczouV/view
