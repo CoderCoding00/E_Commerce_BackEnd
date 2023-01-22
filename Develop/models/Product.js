@@ -1,32 +1,29 @@
-// LOWER CASE COMMENTS PROVIDED BY INSTRUCTOR
-
 // import important parts of sequelize library
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
-const sequelize = require('../config/connection');
+const sequelize = require("../config/connection");
 
 // Initialize Product model (table) by extending off Sequelize's Model class
-class Product extends Model { }
+class Product extends Model {}
 
 // set up fields and rules for Product model
 Product.init(
   {
     // define columns
-    // MY CODE BELOW (USE PROVIDED README INFO)
 
-    // ID COLUMN: INTEGER TYPE, DOESN'T ALLOW NULL VALUES, SET AS PRIMARY KEY, USES AUTOINCREMENT
+    // ID COLUMN:
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    // PRODUCT_NAME COLUMN: STRING TYPE, DOESN'T ALLOW NULL VALUES
+    // PRODUCT_NAME COLUMN:
     product_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // PRICE COLUMN: DECIMAL, DOESN'T ALLOW NULL VALUES, VALIDATES VALUE IS A DECIMAL
+    // PRICE COLUMN: DECIMAL, VALIDATES VALUE IS A DECIMAL
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
@@ -34,7 +31,7 @@ Product.init(
         isDecimal: true,
       },
     },
-    // STOCK COLUMN: INTEGER, DOESN'T ALLOW NULL VALUES, DEFAULT VALUE IS 10, VALIDATES VALUE IS NUMERIC
+    // STOCK COLUMN: INTEGER, DEFAULT VALUE IS 10, VALIDATES VALUE IS NUMERIC
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -47,18 +44,18 @@ Product.init(
     category_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'category',
-        key: 'id',
+        model: "category",
+        key: "id",
       },
     },
   },
-  // CODE PROVIDED BY INSTRUCTOR BELOW
+  // TABLE CONFIGURATION OPTIONS (Check link for sequelize info) (https://sequelize.org/master/manual/model-basics.html#configuration))
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'product',
+    modelName: "product",
   }
 );
 

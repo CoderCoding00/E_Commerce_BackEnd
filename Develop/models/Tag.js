@@ -1,18 +1,15 @@
-// ALL LOWERCASE COMMENTS PROVIDED BY INSTRUCTOR, UPPERCASE COMMENTS BY ME
-
 // import important parts of sequelize library
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
-const sequelize = require('../config/connection.js');
+const sequelize = require("../config/connection.js");
 // Initialize Product model (table) by extending off Sequelize
-class Tag extends Model { }
+class Tag extends Model {}
 
 Tag.init(
   {
-    // define columns
+    // Define Columns
 
-    // MY CODE BELOW
-    // ID COLUMN: INTEGER TYPE, DOESN'T ALLOW NULL VALUES, SET AS PRIMARY KEY, USES AUTOINCREMENT
+    // ID COLUMN:
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,13 +21,13 @@ Tag.init(
       type: DataTypes.STRING,
     },
   },
-  // CODE PROVIDED BY INSTRUCTOR BELOW
+  // TABLE CONFIGURATION OPTIONS (Check link for sequelize info) (https://sequelize.org/master/manual/model-basics.html#configuration))
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'tag',
+    modelName: "tag",
   }
 );
 
