@@ -13,18 +13,27 @@ router.get('/', (req, res) => {
   // "FIND ALL" PRODUCTS USING ATTRIBUTES AND INCLUDE
   Product.findAll({
     include: [
+      Category,
       {
-        // CATEGORY MODEL
-        model: Category,
-        attributes: ['id', 'category_name'],
-      },
-      {
-        // TAG MODEL
         model: Tag,
-        attributes: ['id', 'tag_name'],
-      },
-    ],
+        through: ProductTag,
+        // as: 'product_tags'
+      }
+    ]
   })
+
+    //     {
+    //       // CATEGORY MODEL
+    //       model: Category,
+    //       attributes: ['category_name'],
+    //     },
+    //     {
+    //       // TAG MODEL
+    //       model: Tag,
+    //       attributes: ['tag_name'],
+    //     },
+    //   ],
+    // })
     .then((dbProductData) => res.json(dbProductData))
     .catch((err) => {
       console.log(err);
@@ -42,22 +51,33 @@ router.get('/:id', (req, res) => {
   Product.findOne({
     where: {
       id: req.params.id
-    }
-  },
-    {
-      include: [
-        {
-          // CATEGORY MODEL
-          model: Category,
-          attributes: ['id', 'category_name'],
-        },
-        {
-          // TAG MODEL
-          model: Tag,
-          attributes: ['id', 'tag_name'],
-        },
-      ],
-    })
+    },
+    include: [
+      Category,
+      {
+        model: Tag,
+        through: ProductTag,
+        // as: 'product_tags'
+      }
+    ]
+  })
+
+    // {
+    //   include: [
+    //     {
+    //       // CATEGORY MODEL
+    //       model: Category,
+    //       attributes: ['category_name'],
+    //       // attributes: ['id', 'category_name'],
+    //     },
+    //     {
+    //       // TAG MODEL
+    //       model: Tag,
+    //       attributes: ['tag_name'],
+    //       // attributes: ['id', 'tag_name'],
+    //     },
+    //   ],
+    // })
 
     .then((dbProductData) => {
       if (!dbProductData) {
@@ -78,16 +98,16 @@ router.get('/:id', (req, res) => {
 
 
 // create new product
-//****** LINES 83-154 PROVIDED BY INSTRUCTOR.
+//****** LINES 83-155 PROVIDED BY INSTRUCTOR.
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
+      "product_name": "Basketball",
+      "price": 200.00,
+      "stock": 3,
+      "tagIds": [1, 2, 3, 4]
     }
-  */
+*/
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model

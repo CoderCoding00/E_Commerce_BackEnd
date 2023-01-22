@@ -9,16 +9,17 @@ class Category extends Model { }
 Category.init(
   {
     // define columns
+    // MY CODE BELOW (USE PROVIDED README INFO)
 
-    // "ID" COLUMN"
+    // ID COLUMN:
+    // INTEGER TYPE, DOEN'T ALLOW NULL VALUES, SET AS PRIMARY KEY, USES AUTOINCREMENT
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      // AUTO INCREMENT TO MAKE SURE IT'S A UNIQUE ID
       autoIncrement: true,
     },
-    // "CATEGORY_NAME" COLUMN
+    // "CATEGORY_NAME" COLUMN: STRING TYPE, DOESN'T ALLOW NULL VALUES
     category_name: {
       type: DataTypes.STRING,
       allowNull: false,

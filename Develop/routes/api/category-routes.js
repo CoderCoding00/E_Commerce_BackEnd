@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   // *** MY CODE STARTS HERE
   // "FIND ALL" CATEGORIES USING ATTRIBUTES AND INCLUDE
   Category.findAll({
-    attributes: ['id', 'category_name'],
+    // attributes: ['id', 'category_name'],
     include: [
       {
         model: Product,
@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Products
 
   // *** MY CODE STARTS HERE
-  // "FIND ONE" CATEGORY USING ATTRIBUTES AND INCLUDE
+  // "FIND ONE" CATEGORY
   Category.findOne({
     where: {
       id: req.params.id,
@@ -43,9 +43,8 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        // attributes: ['id', 'category_name'],
-        // attributes: ['product_name', 'price', 'stock', 'category_id'],
-        attributes: ['category_name'],
+        attributes: ['category_id'],
+        // attributes: ['category_name'],
       },
     ],
   })
@@ -78,8 +77,8 @@ router.post('/', (req, res) => {
     .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
       console.log(err);
-      // 500 ERROR FOR A GENERIC SERVER ERROR
-      res.status(500).json(err);
+      // 400 ERROR FOR BAD REQUEST
+      res.status(400).json(err);
     }
     );
 });
@@ -104,7 +103,6 @@ router.put('/:id', (req, res) => {
       res.json(dbCategoryData);
     }
     )
-    // RETURN ERROR IF THERE IS ONE
     .catch((err) => {
       console.log(err);
       // 500 ERROR FOR A GENERIC SERVER ERROR

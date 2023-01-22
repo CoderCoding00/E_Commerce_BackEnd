@@ -11,18 +11,21 @@ router.get('/', (req, res) => {
   //*** MY CODE STARTS HERE
   // "FIND ALL" TAGS USING ATTRIBUTES AND INCLUDE
   Tag.findAll({
-    attributes: ['id', 'tag_name'],
+    // attributes: ['id', 'tag_name'],
+    // attributes: ['tag_name'],
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        through: ProductTag,
+        // attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
       },
     ],
   })
     // .THEN() METHOD TO RETURN JSON DATA
-    .then((dbTagData) => res.json(dbTagData))
+    // .then((dbTagData) => res.json(dbTagData))
+    .then((tags) => res.json(tags))
     .then(() => {
-      // DO A CONSOLE.LOG() TO SEE IF IT WORKS
+      // DO A CONSOLE.LOG() TO SHOW IF IT WORED
       console.log('All data requested from Tag');
     })
     .catch((err) => {
@@ -46,24 +49,37 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        through: ProductTag,
+        // attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
       },
     ],
   })
-    .then((dbTagData) => {
-      if (!dbTagData) {
-        // 404 FOR NOT FOUND
-        res.status(404).json({ message: 'There is no tag found with that id' });
-        return;
-      }
-      res.json(dbTagData);
+    .then((tags) => res.json(tags))
+    .then(() => {
+      // DO A CONSOLE.LOG() TO SHOW IF IT WORED
+      console.log('All data requested from Tag');
     })
     .catch((err) => {
       console.log(err);
       // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    });
+    }
+    );
 });
+// .then((dbTagData) => {
+//   if (!dbTagData) {
+//     // 404 FOR NOT FOUND
+//     res.status(404).json({ message: 'There is no tag found with that id' });
+//     return;
+//   }
+//   res.json(dbTagData);
+// })
+//     .catch((err) => {
+//       console.log(err);
+//       // 500 FOR GENERAL SERVER ERROR
+//       res.status(500).json(err);
+//     });
+// });
 
 router.post('/', (req, res) => {
   // create a new tag
@@ -73,12 +89,24 @@ router.post('/', (req, res) => {
   Tag.create({
     tag_name: req.body.tag_name,
   })
-    .then((dbTagData) => res.json(dbTagData))
+    //     .then((dbTagData) => res.json(dbTagData))
+    //     .catch((err) => {
+    //       console.log(err);
+    //       // 500 FOR GENERAL SERVER ERROR
+    //       res.status(500).json(err);
+    //     });
+    // });
+    .then((tags) => res.json(tags))
+    .then(() => {
+      // DO A CONSOLE.LOG() TO SHOW IF IT WORED
+      console.log('All data requested from Tag');
+    })
     .catch((err) => {
       console.log(err);
       // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    });
+    }
+    );
 });
 
 router.put('/:id', (req, res) => {
@@ -90,21 +118,33 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-    .then((dbTagData) => {
-      if (!dbTagData[0]) {
-        res.status(404).json({ message: 'There is no tag found with that id' });
-        return;
-      }
-      res.json(dbTagData);
-    })
+    .then((tags) => res.json(tags))
     .then(() => {
-      console.log('updated tag');
+      // DO A CONSOLE.LOG() TO SHOW IF IT WORED
+      console.log('All data requested from Tag');
     })
     .catch((err) => {
       console.log(err);
+      // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    });
+    }
+    );
 });
+//     .then((dbTagData) => {
+//       if (!dbTagData[0]) {
+//         res.status(404).json({ message: 'There is no tag found with that id' });
+//         return;
+//       }
+//       res.json(dbTagData);
+//     })
+//     .then(() => {
+//       console.log('Tag Updated');
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
@@ -115,18 +155,30 @@ router.delete('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-    .then((dbTagData) => {
-      if (!dbTagData) {
-        res.status(404).json({ message: 'There is no tag found with that id' });
-        return;
-      }
-      res.json(dbTagData);
+    .then((tags) => res.json(tags))
+    .then(() => {
+      // DO A CONSOLE.LOG() TO SHOW IF IT WORED
+      console.log('All data requested from Tag');
     })
     .catch((err) => {
       console.log(err);
       // 500 FOR GENERAL SERVER ERROR
       res.status(500).json(err);
-    });
+    }
+    );
 });
+//     .then((dbTagData) => {
+//       if (!dbTagData) {
+//         res.status(404).json({ message: 'There is no tag found with that id' });
+//         return;
+//       }
+//       res.json(dbTagData);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       // 500 FOR GENERAL SERVER ERROR
+//       res.status(500).json(err);
+//     });
+// });
 
 module.exports = router;

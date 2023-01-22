@@ -12,43 +12,40 @@ class Product extends Model { }
 Product.init(
   {
     // define columns
+    // MY CODE BELOW (USE PROVIDED README INFO)
 
-    // MY CODE BELOW (USE SEEDS INFO TO NAME COLUMNS)
-    // ID COLUMN
+    // ID COLUMN: INTEGER TYPE, DOESN'T ALLOW NULL VALUES, SET AS PRIMARY KEY, USES AUTOINCREMENT
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    // PRODUCT NAME COLUMN
+    // PRODUCT_NAME COLUMN: STRING TYPE, DOESN'T ALLOW NULL VALUES
     product_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // PRICE COLUMN (USE DECIMAL(10,2) TO STORE FLOATING POINT VALUES)))
+    // PRICE COLUMN: DECIMAL, DOESN'T ALLOW NULL VALUES, VALIDATES VALUE IS A DECIMAL
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      // VALIDATE IT'S A DECIMAL
       validate: {
         isDecimal: true,
       },
     },
-    // STOCK COLUMN (USE INTEGER TO STORE INTEGER VALUES) (USE DEFAULT VALUE OF 10)
+    // STOCK COLUMN: INTEGER, DOESN'T ALLOW NULL VALUES, DEFAULT VALUE IS 10, VALIDATES VALUE IS NUMERIC
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 10,
-      // VALIDATE IT'S NUMERIC
       validate: {
         isNumeric: true,
       },
     },
-    // CATEGORY ID COLUMN
+    // CATEGORY_ID COLUMN: INTEGER, REFERENCES THE CATEGORY MODEL'S ID
     category_id: {
       type: DataTypes.INTEGER,
-      // REFERENCES THE CATEGORY MODEL'S AND ID
       references: {
         model: 'category',
         key: 'id',

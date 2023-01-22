@@ -12,27 +12,24 @@ ProductTag.init(
 
     // MY CODE BELOW
 
-    // ID COLUMN (USE SEEDS INFO TO NAME COLUMNS)
+    // ID COLUMN: INTEGER, DOESN'T ALLOW NULL VALUES, SET AS PRIMARY KEY, USES AUTOINCREMENT
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      // AUTO INCREMENT TO MAKE SURE IT'S A UNIQUE ID 
       autoIncrement: true,
     },
-    // PRODUCT ID COLUMN
+    // PRODUCT_ID COLUMN: INTEGER, REFERENCES PRODUCT MODEL'S ID
     product_id: {
       type: DataTypes.INTEGER,
-      // REFERENCES TO THE PRODUCT MODE & KEY ID
       references: {
         model: 'product',
         key: 'id',
       },
     },
-    // TAG ID COLUMN
+    // TAG_ID COLUMN: INTEGER, REFERENCES TAG MODEL'S ID
     tag_id: {
       type: DataTypes.INTEGER,
-      // REFERENCES TO THE TAG MODEL & KEY ID
       references: {
         model: 'tag',
         key: 'id',

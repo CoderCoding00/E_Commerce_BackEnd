@@ -12,17 +12,15 @@ Tag.init(
     // define columns
 
     // MY CODE BELOW
-    // ID COLUMN (USE SEEDS INFO TO NAME COLUMNS)
+    // ID COLUMN: INTEGER TYPE, DOESN'T ALLOW NULL VALUES, SET AS PRIMARY KEY, USES AUTOINCREMENT
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      // AUTO INCREMENT TO MAKE SURE IT'S A UNIQUE ID
       autoIncrement: true,
     },
-    // TAG NAME COLUMN
+    // TAG_NAME COLUMN: STRING TYPE.
     tag_name: {
-      // STRING DATA TYPE
       type: DataTypes.STRING,
     },
   },

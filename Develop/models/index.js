@@ -4,24 +4,24 @@ const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
 
-// Products belongsTo Category
 
+// ASSOCIATIONS (REFER TO GIVEN README FILE)
+// LOWERCASE COMMENTS PROVIDED BY INSTRUCTOR, UPPERCASE COMMENTS BY ME
 // MY CODE BELOW (REFER TO SEEDS INFO FOR foreignKey NAMES)
+
+// Products belongsTo Category
 Product.belongsTo(Category, {
   // USE FOREIGN KEY OF CATEGORY_ID SINCE PRODUCT BELONGS TO CATEGORY
   foreignKey: 'category_id',
 });
-// Categories have many Products
 
-// MY CODE BELOW
+// Categories have many Products
 Category.hasMany(Product, {
   // USE FOREIGN KEY OF CATEGORY_ID SINCE CATEGORY HAS MANY PRODUCTS
   foreignKey: 'category_id',
 });
 
 // Products belongToMany Tags (through ProductTag)
-
-// MY CODE BELOW
 Product.belongsToMany(Tag, {
   through: {
     model: ProductTag,
