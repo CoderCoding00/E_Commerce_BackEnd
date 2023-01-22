@@ -16,17 +16,16 @@ A manager or owner of an internet retail company could use this application as a
 ## Features
 
 ```md
-When a user adds their database name, MySQL username, and MySQL password to an environment variable file
-they are able to connect to a database using Sequelize.
-When the user enters schema and seed commands, a development database is created and is seeded with test data
-When the user enters the command to invoke the application, their server is started and the Sequelize models are synced to the MySQL database.
+When a user adds their database name, MySQL username, and MySQL password they're able to connect to a database using Sequelize.
+When the user enters schema and seed commands, a development database is created and is seeded with test data.
+When the user enters the terminal command "node server.js" it invokes the application. The server is started, the port it is listening on is shown, and the Sequelize models are synced to the MySQL database.
 When the user opens API GET routes in Insomnia for categories, products, or tags, the data for each of these routes is displayed in a formatted JSON.
-When the user tests API POST, PUT, and DELETE routes in Insomnia, they are able to successfully create, update, and delete data in my database
+When the user tests API POST, PUT, and DELETE routes in Insomnia, they are able to successfully create, update, and delete data in the database
 ```
 
 ## Video Demonstration and Links 
 ## ScreenCastify Link to Video 
-chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/4cddfc2c-0ead-4edd-y2a0-30f4f64c8b57
+https://watch.screencastify.com/v/K9etITb88OQHj0lTlixM
 
-## Embedded Video 
-<iframe src="https://drive.google.com/file/d/1QuQVNerW2P3B3WwYIXpX8QwZRA8g6_WP/preview" width="640" height="480"></iframe>
+## Google Drive Link to Video 
+https://drive.google.com/file/d/1TLPr7NAjfidfhyuZyAP07SFwNuOczouV/view
