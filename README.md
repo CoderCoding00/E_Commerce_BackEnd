@@ -1,4 +1,4 @@
-# Channelge 13 Object-Relational Mapping
+# E-Commerce (ORM) Object-Relational Mapping
 ## E-Commerce Back End
 
 ## Project Info
